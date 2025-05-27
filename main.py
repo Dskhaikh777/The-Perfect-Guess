@@ -8,6 +8,15 @@ def get_high_score():
     except FileNotFoundError:
         return 0
     
+def get_valid_number(prompt):
+    while True:
+        value = input(prompt)
+        if value.isdigit():
+            return int(value)
+        else:
+            print("❌ Invalid input! please enter a number.")
+
+            
 
 def play_game():
     ranges = {"easy": 50, "medium": 100, "hard": 200}
@@ -25,7 +34,7 @@ def play_game():
 
     while a != n:
         try:
-            a = int(input("Guess the number: "))
+            a = get_valid_number("Guess the number: ")
             if a > n:
                 print("Lower Number Please!")
             elif a < n:
