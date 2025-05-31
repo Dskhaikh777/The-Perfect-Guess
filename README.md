@@ -10,5 +10,10 @@ A fun number guessing game built in Python!
 - Replay option
 
 ## ▶️ How to Run
+
+Make sure Python is installed.  
+Install dependencies using:
+
 ```bash
+pip install colorama
 python perfect_guess.py
