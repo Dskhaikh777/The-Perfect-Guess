@@ -19,6 +19,29 @@ def get_valid_number(prompt):
             print(Fore.RED + "❌ Invalid input! please enter a number.")
 
             
+def main_menu():
+    while True:
+        print(Style.BRIGHT + Fore.YELLOW + "\n🎮=== The Perfect Guess ===🎮")
+        print("1. Play Game")
+        print("2. View High Score")
+        print("3. Exit")
+
+        choice = input(Fore.CYAN + "Enter your choice (1/2/3): ")
+
+        if choice == '1':
+            while True:
+                play_game()
+                again = input(Fore.CYAN + "\nDo you want to play again? (yes/no): ").strip().lower()
+                if again != "yes":
+                    print(Style.BRIGHT + Fore.YELLOW + "Thanks for playing! 👋")
+                    break
+        elif choice == '2':
+            print(Fore.BLUE + f"High Score: {get_high_score()}")
+        elif choice == '3':
+            print(Style.BRIGHT + Fore.YELLOW + "Thank you for playing! Goodbye! 👋")
+            break
+        else:
+            print(Fore.RED + "❌ Invalid choice. Please try again.")
 
 def play_game():
     ranges = {"easy": 50, "medium": 100, "hard": 200}
@@ -38,9 +61,9 @@ def play_game():
         try:
             a = get_valid_number(Fore.CYAN + "Guess the number: ")
             if a > n:
-                print(Fore.MAGENTA + "Lower Number Please!")
+                print(Fore.MAGENTA + "📉 Lower Number Please!")
             elif a < n:
-                print(Fore.MAGENTA + "Higher Number Please!")
+                print(Fore.MAGENTA + "📈 Higher Number Please!")
         
             if a != n:  # used this if block to avoid duplication 
                 # score -= 5
@@ -62,7 +85,7 @@ def play_game():
 
     score += bonus
 
-    print(Fore.GREEN + f"You have guessed the number {n} correctly in {guesses - 1} attempts.")
+    print(Fore.GREEN + f"🎯 You have guessed the number {n} correctly in {guesses - 1} attempts.")
     print(Fore.BLUE + f"Bonus for time: {bonus}")
     print(Fore.BLUE + f"Final score (with bonus): {score}")
 
@@ -78,11 +101,4 @@ def play_game():
 
     print(Style.BRIGHT+ Fore.YELLOW + f"You took {time_taken:.2f} seconds to guess the number.")
 
-
-while True:
-    play_game()
-    again = input(Fore.CYAN + "\nDo you want to play again? (yes/no): ").strip().lower()
-    if again != "yes":
-        print(Style.BRIGHT + Fore.YELLOW + "Thanks for playing! 👋")
-        break
-
+main_menu()
