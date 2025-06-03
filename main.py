@@ -1,14 +1,19 @@
 import random
 import time 
+import json
 from colorama import Fore, init, Style
 init(autoreset=True) # Automatically reset style for each print 
 
-def get_high_score():
-    try:
-        with open("highscore.txt", "r") as f:
-            return int(f.read())
-    except FileNotFoundError:
-        return 0
+try:
+    with open("high_scores.json", "r") as f:
+        high_scores = json.load(f)
+except FileNotFoundError:
+    high_scores = {} # <-- If file doesn't exit
+
+def show_high_scores(high_scores_dict):
+    for name, score in sorted(high_scores_dict.items(), key= lambda x: x[1], reverse=True):
+        print(f"{name}: {score}")
+
     
 def get_valid_number(prompt):
     while True:
@@ -36,7 +41,9 @@ def main_menu():
                     print(Style.BRIGHT + Fore.YELLOW + "Thanks for playing! 👋")
                     break
         elif choice == '2':
-            print(Fore.BLUE + f"High Score: {get_high_score()}")
+            print(Fore.BLUE + "\n🏆 High Scores:")
+            show_high_scores(high_scores)
+
         elif choice == '3':
             print(Style.BRIGHT + Fore.YELLOW + "Thank you for playing! Goodbye! 👋")
             break
@@ -45,6 +52,7 @@ def main_menu():
 
 def play_game():
     ranges = {"easy": 50, "medium": 100, "hard": 200}
+    player_name = input("Enter your name: ").strip().capitalize()
     difficulty = input(Style.BRIGHT + Fore.BLUE + "Choose difficulty (Easy/Medium/Hard): ").lower()
     max_value = ranges.get(difficulty, 100)  # Default to medium
     n = random.randint(1, max_value)
@@ -89,15 +97,13 @@ def play_game():
     print(Fore.BLUE + f"Bonus for time: {bonus}")
     print(Fore.BLUE + f"Final score (with bonus): {score}")
 
-    high_score = get_high_score()
+    global high_scores # Dictionary to store names and scores
 
-    if score > high_score:
-        print(Style.BRIGHT + Fore.YELLOW + "🎉 New High Score!")
-        with open("highscore.txt", "w") as f:
-            f.write(str(score))
-    else:
-        print(Style.NORMAL + Fore.WHITE + f"High Score: {high_score}")
-
+    if player_name not in high_scores or score > high_scores[player_name]:
+        high_scores[player_name] = score
+        with open("high_scores.json", "w") as f:
+            json.dump(high_scores, f)
+        print(Style.BRIGHT + Fore.YELLOW + f"🎉 New high score for {player_name}!")
 
     print(Style.BRIGHT+ Fore.YELLOW + f"You took {time_taken:.2f} seconds to guess the number.")
 
