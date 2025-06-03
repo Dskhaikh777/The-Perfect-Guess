@@ -22,18 +22,6 @@ Now with menus, emojis, scoring, and a high score system!
 
 ---
 
-## ▶️ How to Run
-
-Make sure Python is installed.  
-Install dependencies using:
-
-```bash
-pip install colorama
-python perfect_guess.py
-
-
----
-
 ## 📌 Project Status
 
 🟢 Version 1.0 completed (CLI-based)
@@ -44,3 +32,14 @@ Planned Features for Future Versions:
 - 📊 Score history with timestamps
 - 🌐 Multiplayer mode (local/online)
 - 📦 Packaged `.exe` version using PyInstaller
+
+---
+
+## ▶️ How to Run
+
+Make sure Python is installed.  
+Install dependencies using:
+
+```bash
+pip install colorama
+python perfect_guess.py
