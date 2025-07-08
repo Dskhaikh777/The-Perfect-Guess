@@ -22,19 +22,6 @@ Now with menus, emojis, scoring, and a high score system!
 
 ---
 
-## 📌 Project Status
-
-🟢 Version 1.0 completed (CLI-based)
-
-Planned Features for Future Versions:
-- 🖥️ GUI version using Tkinter or PyQt
-- 🎵 Add sound effects for actions
-- 📊 Score history with timestamps
-- 🌐 Multiplayer mode (local/online)
-- 📦 Packaged `.exe` version using PyInstaller
-
----
-
 ## ▶️ How to Run
 
 Make sure Python is installed.  
